@@ -561,38 +561,25 @@ public class AccessControlSystem {
     }
 }
 *//Cenário 1 – Login bem-sucedido como ADMIN e listagem de usuários
-
 //1. Iniciar o programa.
 //2. Escolher opção 1 - Login.
 //3. Informar:• ID: admin
 //• Senha: admin123
-
 //4. Verificar mensagem de sucesso de login.
 //5. No menu principal, escolher 2 - Gerenciar usuários.
 //6. Escolher 1 - Listar usuários.
 //7. Verificar que o usuário admin aparece na lista.
-
-
 //Resultado esperado: login autorizado, usuário admin listado corretamente.
-
 ---
-
 //Cenário 2 – Tentativa de login com senha incorreta
-
 //1. Iniciar o programa.
 //2. Escolher 1 - Login.
 //3. Informar:• ID: admin
 //• Senha: senhaErrada
-
 //4. Verificar mensagem de “Senha incorreta.” e permanência no menu de login.
-
-
 //Resultado esperado: acesso negado, sem travar o programa.
-
 ---
-
 //Cenário 3 – Cadastro de novo FUNCIONARIO e acesso autorizado a ESCRITORIO
-
 //1. Logar como admin (cenário 1).
 //2. Ir em 2 - Gerenciar usuários.
 //3. Escolher 2 - Cadastrar usuário.
@@ -600,42 +587,28 @@ public class AccessControlSystem {
 //• Nome: Funcionario 1
 //• Perfil: escolher opção correspondente a FUNCIONARIO
 //• Senha: func123
-
 //5. Fazer logout (9 - Logout).
 //6. Fazer login com:• ID: func1
 //• Senha: func123
-
 //7. No menu principal, escolher 1 - Tentar acessar área.
 //8. Selecionar a área ESCRITORIO.
-
-
 //Resultado esperado: acesso à área ESCRITORIO autorizado e registro correspondente no histórico.
-
 ---
-
 //Cenário 4 – Tentativa de acesso negado (VISITANTE tentando acessar SERVIDOR)
-
-1. //Logar como admin.
-2. //Cadastrar usuário:• ID: visit1
-• //Nome: Visitante 1
-• //Perfil: VISITANTE
-• //Senha: visit123
-
+ //Logar como admin.
+ //Cadastrar usuário:• ID: visit1
+ //Nome: Visitante 1
+ //Perfil: VISITANTE
+ //Senha: visit123
 //3. Fazer logout.
 //4. Fazer login com:• ID: visit1
 //• Senha: visit123
-
 //5. Escolher 1 - Tentar acessar área.
 //6. Selecionar a área SERVIDOR.
-
-
 //Resultado esperado: mensagem de acesso NEGADO e registro no histórico com resultado “NEGADO”.
-
 ---
-
 //Cenário 5 – Consulta do histórico de acessos pelo ADMIN
-
-1. //Após executar cenários 3 e 4 (para gerar registros), logar como admin.
-2. //No menu principal, escolher 3 - Consultar histórico de acessos.
-3. //Verificar que:• Há registros de tentativas de func1 e visit1.
-• //Cada registro mostra data/hora, usuário, área e resultado (AUTORIZADO ou NEGADO).
+//Após executar cenários 3 e 4 (para gerar registros), logar como admin.
+//No menu principal, escolher 3 - Consultar histórico de acessos.
+//Verificar que:• Há registros de tentativas de func1 e visit1.
+//Cada registro mostra data/hora, usuário, área e resultado (AUTORIZADO ou NEGADO).

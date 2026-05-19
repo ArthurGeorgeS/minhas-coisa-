@@ -1,4 +1,4 @@
-public class extend Exame {
+public class Exame {
 
     private String tipo;
     private String resultado;

@@ -1,72 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 public class Main {
-
-    public static class Vacina {
-        private String nome, dataAplicacao, dataReforco, lote;
-
-        public Vacina(String nome, String dataAplicacao, String dataReforco, String lote) {
-            this.nome = nome;
-            this.dataAplicacao = dataAplicacao;
-            this.dataReforco = dataReforco;
-            this.lote = lote;
-        }
-
-        public String getNome() { return nome; }
-        public String getDataAplicacao() { return dataAplicacao; }
-        public String getDataReforco() { return dataReforco; }
-        public String getLote() { return lote; }
-    }
-
-    public static class Internacao {
-        private String dataEntrada, dataSaida, motivo, observacoes;
-
-        public Internacao(String dataEntrada, String dataSaida, String motivo, String observacoes) {
-            this.dataEntrada = dataEntrada;
-            this.dataSaida = dataSaida;
-            this.motivo = motivo;
-            this.observacoes = observacoes;
-        }
-
-        public String getDataEntrada() { return dataEntrada; }
-        public String getDataSaida() { return dataSaida; }
-        public String getMotivo() { return motivo; }
-        public String getObservacoes() { return observacoes; }
-    }
-
-    public static class Exame {
-        private String tipo, resultado, data, arquivoResultado;
-
-        public Exame(String tipo, String resultado, String data, String arquivoResultado) {
-            this.tipo = tipo;
-            this.resultado = resultado;
-            this.data = data;
-            this.arquivoResultado = arquivoResultado;
-        }
-
-        public String getTipo() { return tipo; }
-        public String getResultado() { return resultado; }
-        public String getData() { return data; }
-        public String getArquivoResultado() { return arquivoResultado; }
-    }
-
-    public static class Agendamento {
-        private String data, hora, tipoServico, status;
-
-        public Agendamento(String data, String hora, String tipoServico, String status) {
-            this.data = data;
-            this.hora = hora;
-            this.tipoServico = tipoServico;
-            this.status = status;
-        }
-
-        public String getData() { return data; }
-        public String getHora() { return hora; }
-        public String getTipoServico() { return tipoServico; }
-        public String getStatus() { return status; }
-    }
 
     // Banco de dados simples
     static List<Agendamento> agendamentos = new ArrayList<>();
@@ -93,7 +28,7 @@ public class Main {
     }
 
     // CRUDs
-    public static void crudAgendamento(Scanner sc) {
+    public static void crudAgendamento(Scanner sc, ControleDeAcesso controle) {
         System.out.println("\n--- AGENDAMENTO ---");
         System.out.print("Data: ");
         String data = sc.nextLine();
@@ -104,17 +39,11 @@ public class Main {
         System.out.print("Status: ");
         String status = sc.nextLine();
 
-        agendamentos.add(new Agendamento(data, hora, tipo, status));
-        System.out.println("Agendamento cadastrado!");
+        controle.cadastrarAgendamento(new Agendamento(data, hora, tipo, status));
     }
 
-    public static void listarAgendamentos() {
-        System.out.println("\n--- LISTA DE AGENDAMENTOS ---");
-        int i = 0;
-        for (Agendamento a : agendamentos) {
-            System.out.println(i + " - " + a.getTipoServico() + " | " + a.getData() + " " + a.getHora());
-            i++;
-        }
+    public static void listarAgendamentos(ControleDeAcesso controle) {
+        controle.listarAgendamentos();
     }
 
     public static void crudExame(Scanner sc) {
@@ -165,7 +94,7 @@ public class Main {
         }
     }
 
-    public static void crudInternacao(Scanner sc) {
+    public static void crudInternacao(Scanner sc, ControleDeAcesso controle) {
         System.out.println("\n--- INTERNAÇÃO ---");
         System.out.print("Data entrada: ");
         String entrada = sc.nextLine();
@@ -176,23 +105,18 @@ public class Main {
         System.out.print("Observações: ");
         String obs = sc.nextLine();
 
-        internacoes.add(new Internacao(entrada, saida, motivo, obs));
-        System.out.println("Internação cadastrada!");
+        controle.cadastrarInternacao(new Internacao(entrada, saida, motivo, obs));
     }
 
-    public static void listarInternacoes() {
-        System.out.println("\n--- LISTA DE INTERNAÇÕES ---");
-        int i = 0;
-        for (Internacao in : internacoes) {
-            System.out.println(i + " - " + in.getMotivo() + " | Entrada: " + in.getDataEntrada());
-            i++;
-        }
+    public static void listarInternacoes(ControleDeAcesso controle) {
+        controle.listarInternacoes();
     }
 
     // MAIN
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        ControleDeAcesso controle = new ControleDeAcesso();
         int opcao;
 
         do {
@@ -211,8 +135,8 @@ public class Main {
 
                         switch (opServ) {
                             case 1:
-                                crudAgendamento(sc);
-                                listarAgendamentos();
+                                crudAgendamento(sc, controle);
+                                listarAgendamentos(controle);
                                 break;
 
                             case 2:
@@ -226,8 +150,8 @@ public class Main {
                                 break;
 
                             case 4:
-                                crudInternacao(sc);
-                                listarInternacoes();
+                                crudInternacao(sc, controle);
+                                listarInternacoes(controle);
                                 break;
 
                             case 0:

@@ -1,3 +1,4 @@
+
 public class Internacao {
 
     private String dataEntrada;
@@ -12,15 +13,24 @@ public class Internacao {
         this.observacoes = observacoes;
     }
 
-    public String getDataEntrada() { return dataEntrada; }
-    public void setDataEntrada(String dataEntrada) { this.dataEntrada = dataEntrada; }
+    public String getDataEntrada() {
+        return dataEntrada;
+    }
 
-    public String getDataSaida() { return dataSaida; }
-    public void setDataSaida(String dataSaida) { this.dataSaida = dataSaida; }
+    public String getDataSaida() {
+        return dataSaida;
+    }
 
-    public String getMotivo() { return motivo; }
-    public void setMotivo(String motivo) { this.motivo = motivo; }
+    public String getMotivo() {
+        return motivo;
+    }
 
-    public String getObservacoes() { return observacoes; }
-    public void setObservacoes(String observacoes) { this.observacoes = observacoes; }
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    @Override
+    public String toString() {
+        return motivo + " | Entrada: " + dataEntrada;
+    }
 }
